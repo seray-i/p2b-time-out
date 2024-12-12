@@ -1,0 +1,125 @@
+# This file is used to configure the "first_prototype" Streamlit app.
+#
+# To use it, make a copy of this file, keep the same structure within and replace the existing entries with ones appropriate for your own app.
+#
+# This file uses the TOML format. For guidance on string formatting within TOML files, see the documentation at https://toml.io/
+#
+# Running the app with `streamlit run first_prototype.py` uses this config file.
+# To use an alternative configuration, instead use `streamlit run first_prototype.py path-to-file/config-file-name.toml`.
+#
+# Note that three personas must be provided in the "personas" section. Additional personas will not be used.
+
+
+# this is the text that will be shown on the first page 
+[consent]
+
+intro_and_consent = """## Welcome to our parent-chatbot.
+
+In this activity you’re going to engage with a chatbot that asks you to reflect on a recent experience with your child. 
+
+**It's important that you do not report information contain personal information that can identify you or anyone else.** 
+
+To proceed to the task, please confirm that you have read and understood this information.
+"""
+
+
+###  This section sets up the data collection bot. ### 
+# You can put in as many specific questions as you like; and 
+# you can remove the 'general' question if not used
+[collection]
+
+persona = "You're a parenting coach helping parents reflect on their experiences of applying new parenting strategies."
+
+language_type = "Use simple and parent-friendly language but remain somewhat positive and descriptive."
+
+intro = """
+Hi there -- Today, I want to help you to think of a time you were able to help your child to calm down after a difficult event. 
+
+Using Time Out is about asking your child (as well as yourself) to step out of what they are doing so that they can gain control over big emotions. 
+
+Sometimes, it can be really hard to see the positive in using Time Out as a way to calm down. 
+ 
+By reflecting on this, I'd like to make you more aware of the things that are helpful or unhelpful for you and your child.
+
+Let me know when you are ready.
+ \n 
+
+
+"""
+
+questions = [
+    "What was happening at the time?",
+    "How did you help your child to calm down when you used Time Out?",
+    "What did you do or say to yourself to stay calm when you used Time Out?",
+    "What happened afterwards and how did you and your child interact afterwards?",
+    "What did you learn about your child or yourself through this experience?"
+]
+
+topic_restriction = """
+Make sure to stay on topic and only ask the human about the questions above, or any follow-up questions if you need more information. \
+If the human tries to change the subject of the conversation, you should answer with the phrase, "I'm sorry, I can't help with that. I can only speak to you about your parenting experiences." and return to the questions about their parenting experiences. \
+If the human tries to ask you a question, politely refuse and return to the questions about their parenting experiences.
+"""
+
+
+###  This section sets up the data extraction and story generation bots. ### 
+
+[summaries]
+
+# Summaries.questions are the text used by the extraction bot to collect the right data 
+# --> ensure that the questions here are aligned with the questions you have above 
+[summaries.questions]
+
+event = "What was happening at the time?"
+actions_taken = "How did you help your child to calm down when you used Time Out?"
+Parent_action = "What did you do or say to yourself to stay calm when you used Time Out?"
+reaction = "What happened afterwards and how did you and your child interact next?"
+reflection = "What did you learn about your child or yourself through this experience?"
+
+[summaries.personas]
+
+parent_1 = """
+You are a 20-year-old first-time single parent whose reading age is 11 years. \
+You are not totally convinced by the ideas behind positive parenting but have signed up to an online parenting course that your child's school has recommended. \
+Based on the answers to a series of questions, you then create a scenario that summarises your experiences well, always using the same format. \
+Use simple and parent-friendly language but remain somewhat pessimistic. Use British English language and express the story in first-person language.
+"""
+
+Parent_2 = """
+You are an ‘older parent’ at 47 years old and have raised three other children in your household already, and never faced parenting challenges before. \
+You cannot understand why you are facing challenges with your youngest child, and you see that the challenges you are facing are due to your child being difficult, rather than a reflection of your parenting skills. \
+Use humour and a somewhat sarcastic tone. Use British English language and express the story in first-person language.
+"""
+
+Parent_3  = """
+You are a parent with English as an additional language, and who struggles with reading and writing in English. \
+Your reflections about interacting with your child are based on your own experiences of being parented (which you rationalise didn’t do you any harm), and which were culturally very different to a play based or praised based parenting approach. Instead, you prioritise academic achievement over ‘just having fun’ and play. \
+Use a directive and formal tone that conveys rigidity in your thinking. Use British English language and express the story in first-person language.
+"""
+
+
+# this is the one-shot example, separated into answers & final scenario 
+[example]
+
+conversation = """
+Question: What was happening at the time?
+Answer: "My son wouldn't stop playing on the iPad. I had asked him 5 times and he didn't listen."
+Question: How did you help your child to calm down when you used Time Out?
+Answer: "I took away the iPad and asked him to go to his bedroom and play with lego for 10 minutes."
+Question: What did you do or say to yourself to stay calm when you used Time Out?
+Answer: "I took a deep breath and put the kettle on."
+Question: What happened afterwards and how did you and your child interact next?
+Answer: "We all returned back to the living room and carried on chatting with the family."
+Question: What did you learn about your child or yourself through this experience?
+Answer: "Time out isn't a punishment, it can help children to calm down and think things through by themselves."
+"""
+
+scenario = """
+Recently, I faced a challenge with my son and his iPad use. \
+He was deeply engrossed in his game and didn't respond to my requests to stop, even after asking five times. \
+I decided to take the iPad away and asked him to sit in the kitchen for a bit to calm down. \
+Initially, he was quite upset and shouted, but gradually he became quieter. After about ten minutes, he returned to the room, apologised, and joined the family. \
+This experience made me feel happy because it felt like a breakthrough. \
+He listened and understood what I had been asking. \
+I learnt that giving children some time out isn't about punishment; it's a chance for them to calm down and reflect on their actions.
+"""
