@@ -549,7 +549,7 @@ def reviewData(testing):
 
 
         ## if we haven't selected scenario, let's give them a choice. 
-        st.chat_message("ai").write("Please have a look at the scenarios above. Use the 👍 and 👎  to leave a rating and short comment on each of the scenarios. Then pick the one that you like the most to continue. ")
+        st.chat_message("ai").write("Please have a look at the scenarios above. Use the 👍 and 👎  to leave a rating and short comment on how each of the scenarios sounds like something you would say. Then pick the one that you like the most to continue. ")
      
         b1,b2,b3 = st.columns(3)
         # set up the popover buttons 
